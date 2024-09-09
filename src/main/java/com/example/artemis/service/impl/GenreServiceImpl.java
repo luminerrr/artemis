@@ -32,8 +32,8 @@ public class GenreServiceImpl implements GenreService {
   }
 
   public ResponseEntity<String> deleteGenre(Long id) {
-    genreRepository.deleteById(id);
     if(genreRepository.findById(id).isPresent()) {
+      genreRepository.deleteById(id);
       return new ResponseEntity<>("Success delete", HttpStatus.OK);
     }
     
