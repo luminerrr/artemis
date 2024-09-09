@@ -19,3 +19,24 @@ CREATE TABLE books (
     author_id INT REFERENCES authors(id),
     genre_id INT references genres(id)
 );
+
+ALTER TABLE books
+ADD COLUMN isbn VARCHAR(20) NOT NULL;
+
+ALTER TABLE books
+ADD COLUMN published_date DATE;
+
+alter table books
+rename publisheddate to published_date
+
+alter table authors rename description to bio
+
+alter table authors drop age
+
+alter table genres drop description
+
+insert into genres (
+name 
+) values (
+'blenger'
+)
