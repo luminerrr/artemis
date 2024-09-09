@@ -9,9 +9,10 @@ import com.example.artemis.entity.GenreEntity;
 public interface GenreService {
   
   ResponseEntity <List<GenreEntity>> getAllGenres();
-  GenreEntity saveGenre(GenreEntity genre);
   ResponseEntity<GenreEntity> getGenreById(Long id);
-  void deleteGenre(Long id);
+  ResponseEntity<String> deleteGenre(Long id);
+
+  ResponseEntity<GenreEntity> saveGenre(GenreEntity genre);
   GenreEntity addGenre(GenreEntity genre);
   GenreEntity updaGenre(GenreEntity genre);
 }

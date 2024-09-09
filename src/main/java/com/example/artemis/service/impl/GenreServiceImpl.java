@@ -27,8 +27,19 @@ public class GenreServiceImpl implements GenreService {
     }
   }
 
-  public void deleteGenre(Long id) {
+  public ResponseEntity<String> deleteGenre(Long id) {
     genreRepository.deleteById(id);
+    if(genreRepository.findById(id).isPresent()) {
+      return new ResponseEntity<>("Success delete", HttpStatus.OK);
+    }
+    
+    return new ResponseEntity<>("Failed delete", HttpStatus.NOT_FOUND);
+  }
+
+  public ResponseEntity<GenreEntity> saveGenre(GenreEntity genre) {
+    GenreEntity res = genreRepository.save(genre);
+
+    return new ResponseEntity<>(res, HttpStatus.OK);
   }
   
 }
