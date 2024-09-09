@@ -23,11 +23,19 @@ public class BookEntity {
     @JsonProperty("title")
     private String title;
 
+    @Column(name = "isbn", nullable = false)
+    @JsonProperty("isbn")
+    private String isbn;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
     private AuthorEntity employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id", referencedColumnName = "id", nullable = false)
-    private GenreEntity employee;
+    private GenreEntity genre;
+
+    @Column(name = "published_date", nullable = false)
+    @JsonProperty("published_date")
+    private LocalDate published_date;
 }

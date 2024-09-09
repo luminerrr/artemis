@@ -20,8 +20,8 @@ public class GenreEntity {
     @JsonProperty("name")
     private String name;
 
-    @Column(name = "description", nullable = false)
-    @JsonProperty("description")
-    private String description;
+//    @Column(name = "description", nullable = false)
+//    @JsonProperty("description")
+//    private String description;
 
 }

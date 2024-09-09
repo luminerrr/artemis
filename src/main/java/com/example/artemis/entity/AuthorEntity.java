@@ -23,12 +23,12 @@ public class AuthorEntity {
     @JsonProperty("name")
     private String name;
 
-    @Column(name = "age", nullable = false)
-    @JsonProperty("age")
-    private Integer age;
+//    @Column(name = "age", nullable = false)
+//    @JsonProperty("age")
+//    private Integer age;
 
-    @Column(name = "description", nullable = false)
-    @JsonProperty("description")
-    private String description;
+    @Column(name = "bio", nullable = false)
+    @JsonProperty("bio")
+    private String bio;
 
 }
