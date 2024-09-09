@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
+    Optional<BookEntity> findById(Long id);
+
     Optional<BookEntity> findByTitle(String title);
 
     Optional<BookEntity> findByTitleIgnoreCase(String title);
