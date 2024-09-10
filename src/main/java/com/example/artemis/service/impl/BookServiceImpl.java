@@ -24,18 +24,18 @@ public class BookServiceImpl implements BookService {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
-//  @Override
-//  public ResponseEntity<BookEntity> getBookById(Long id) {
-//    // TODO: Handle null
-//    BookEntity book = bookRepository.findById(id).orElse(null);
-//
-//    return new ResponseEntity<>(book, HttpStatus.OK);
-//  }
-//
-//  @Override
-//  public ResponseEntity<BookEntity> createBook(BookEntity book) {
-//
-//  }
+  @Override
+  public ResponseEntity<BookEntity> getBookById(Long id) {
+    // TODO: Handle null
+    BookEntity book = bookRepository.findById(id).orElse(null);
+
+    return new ResponseEntity<>(book, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<BookEntity> createBook(BookEntity book) {
+
+  }
 
   @Override
   public ResponseEntity<List<BookEntity>> searchBooks(String title, String author, String genre) {
