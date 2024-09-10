@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class GenreServiceImpl implements GenreService {
   @Autowired
   private GenreMapper genreMapper;
 
+  @Override
   public ResponseEntity<List<GenreDto>> getAllGenres() {
     List<GenreEntity> res = genreRepository.findAll();
     List<GenreDto> dtoRes = res.stream()
@@ -31,6 +34,7 @@ public class GenreServiceImpl implements GenreService {
     return new ResponseEntity<>(dtoRes, HttpStatus.OK);
   }
 
+  @Override
   public ResponseEntity<GenreDto> getGenreById(Long id) {
     var result = genreRepository.findById(id);
     if(result.isPresent()) {
@@ -41,6 +45,7 @@ public class GenreServiceImpl implements GenreService {
     }
   }
 
+  @Override
   public ResponseEntity<String> deleteGenre(Long id) {
     if(genreRepository.findById(id).isPresent()) {
       genreRepository.deleteById(id);
@@ -50,6 +55,7 @@ public class GenreServiceImpl implements GenreService {
     return new ResponseEntity<>("Failed delete", HttpStatus.NOT_FOUND);
   }
 
+  @Override
   public ResponseEntity<GenreDto> saveGenre(GenreDto genre) {
     GenreEntity entity = genreMapper.toEntity(genre);
     GenreEntity saved = genreRepository.save(entity);
@@ -60,6 +66,7 @@ public class GenreServiceImpl implements GenreService {
     return new ResponseEntity<>(savedDto, HttpStatus.OK);
   }
 
+  @Override
   public ResponseEntity<GenreDto> updateGenre(Long id, GenreDto genre) {
     Optional<GenreEntity> genreByIdOpt = genreRepository.findById(id);
     if (!genreByIdOpt.isPresent()) {
@@ -72,6 +79,14 @@ public class GenreServiceImpl implements GenreService {
     GenreDto dtoRes = genreMapper.toDto(genreByIdEntity);
 
     return new ResponseEntity<>(dtoRes, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Page<GenreDto>> getGenrePages(Pageable pageable) {
+    Page<GenreEntity> pageEntity = genreRepository.findAll(pageable);
+    Page<GenreDto> pageDto = pageEntity.map(genreMapper::toDto);
+
+    return new ResponseEntity<>(pageDto, HttpStatus.OK);
   }
   
 }

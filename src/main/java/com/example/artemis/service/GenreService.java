@@ -2,6 +2,8 @@ package com.example.artemis.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -16,4 +18,5 @@ public interface GenreService {
   ResponseEntity<String> deleteGenre(Long id);
   ResponseEntity<GenreDto> saveGenre(GenreDto genre);
   ResponseEntity<GenreDto> updateGenre(Long id,GenreDto genre);
+  ResponseEntity<Page<GenreDto>> getGenrePages(Pageable pageable);
 }
