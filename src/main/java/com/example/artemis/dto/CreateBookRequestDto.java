@@ -1,5 +1,7 @@
 package com.example.artemis.dto;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 public class CreateBookRequestDto {
   @JsonProperty("title")
-  private Long title;
+  private String title;
 
   @JsonProperty("isbn")
   private String isbn;
@@ -26,5 +28,5 @@ public class CreateBookRequestDto {
   private Long genre_id;
 
   @JsonProperty("published_date")
-  private String published_date;
+  private LocalDate published_date;
 }
