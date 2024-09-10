@@ -55,4 +55,8 @@ public class BookController {
       return bookService.searchBooks(title, author, genre);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<BookEntity> getBookByIdEntity(@PathVariable(name = "id") Long id) {
+      return bookService.getBookById(id);
+  }
 }
