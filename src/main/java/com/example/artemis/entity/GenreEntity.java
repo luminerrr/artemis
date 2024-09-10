@@ -1,5 +1,7 @@
 package com.example.artemis.entity;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class GenreEntity {
+public class GenreEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
