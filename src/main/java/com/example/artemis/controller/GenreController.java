@@ -2,6 +2,7 @@ package com.example.artemis.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.artemis.dto.CreateGenreRequestDto;
 import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
 import com.example.artemis.service.GenreService;
@@ -47,8 +48,8 @@ public class GenreController {
 
   // POST /
   @PostMapping
-  public ResponseEntity<GenreDto> createGenre(@RequestBody GenreDto entity) {
-      return genreService.saveGenre(entity);
+  public ResponseEntity<GenreDto> createGenre(@RequestBody CreateGenreRequestDto dto) {
+    return genreService.saveGenre(dto);
   }
   
   // PUT /id

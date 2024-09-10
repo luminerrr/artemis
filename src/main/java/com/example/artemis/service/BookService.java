@@ -12,6 +12,6 @@ public interface BookService {
   ResponseEntity <BookEntity> createNewBook(CreateBookRequestDto book);
   ResponseEntity <BookEntity> getBookById(Long id);
   ResponseEntity <String> deleteBook(Long id);
-  ResponseEntity <BookEntity> updateBook(Long id, BookEntity book);
+  ResponseEntity <BookEntity> updateBook(Long id, CreateBookRequestDto book);
   ResponseEntity <List<BookEntity>> searchBooks(String title, String author, String genre);
 }

@@ -72,5 +72,35 @@ public class BookServiceImpl implements BookService {
     }
     return new ResponseEntity<>(searchedBooks, HttpStatus.OK);
   }
+
+  @Override
+  public ResponseEntity<String> deleteBook(Long id) {
+    if(bookRepository.findById(id).isPresent()) {
+      bookRepository.deleteById(id);
+      return new ResponseEntity<>("Success Delete", HttpStatus.OK);
+    }
+
+    return new ResponseEntity<>("Failed delete", HttpStatus.NOT_FOUND);
+  }
+
+  @Override
+  public ResponseEntity<BookEntity> updateBook(Long id, CreateBookRequestDto book) {
+    Optional<BookEntity> bookEntity = bookRepository.findById(id);
+    Optional<AuthorEntity> author = authorRepository.findById(book.getAuthor_id());
+    Optional<GenreEntity> genre = genreRepository.findById(book.getGenre_id());
+
+    if ((!bookEntity.isPresent()) || (!author.isPresent()) || (!genre.isPresent())) {
+      return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    BookEntity bookEntityGet = bookEntity.get();
+    bookEntityGet.setAuthor(author.get());
+    bookEntityGet.setGenre(genre.get());
+    bookEntityGet.setIsbn(book.getIsbn());
+    bookEntityGet.setPublished_date(book.getPublished_date());
+    bookEntityGet.setTitle(book.getTitle());
+
+    return new ResponseEntity<>(bookEntityGet, HttpStatus.OK);
+  }
   
 }

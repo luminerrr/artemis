@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.example.artemis.dto.CreateGenreRequestDto;
 import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
 
@@ -16,7 +17,7 @@ public interface GenreService {
   ResponseEntity <List<GenreDto>> getAllGenres();
   ResponseEntity<GenreDto> getGenreById(Long id);
   ResponseEntity<String> deleteGenre(Long id);
-  ResponseEntity<GenreDto> saveGenre(GenreDto genre);
+  ResponseEntity<GenreDto> saveGenre(CreateGenreRequestDto genre);
   ResponseEntity<GenreDto> updateGenre(Long id,GenreDto genre);
   ResponseEntity<Page<GenreDto>> getGenrePages(Pageable pageable);
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.artemis.dto.CreateGenreRequestDto;
 import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
 import com.example.artemis.mapper.GenreMapper;
@@ -56,13 +57,13 @@ public class GenreServiceImpl implements GenreService {
   }
 
   @Override
-  public ResponseEntity<GenreDto> saveGenre(GenreDto genre) {
-    GenreEntity entity = genreMapper.toEntity(genre);
+  public ResponseEntity<GenreDto> saveGenre(CreateGenreRequestDto genre) {
+    if(genre == null) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    GenreEntity entity = new GenreEntity();
+    entity.setName(entity.getName());
     GenreEntity saved = genreRepository.save(entity);
     GenreDto savedDto = genreMapper.toDto(saved);
-    // GenreRepository genreRes = genreMapper.toEntity(genre);
-    // GenreDto res = genreRepository.save(genre);
-
+   
     return new ResponseEntity<>(savedDto, HttpStatus.OK);
   }
 
