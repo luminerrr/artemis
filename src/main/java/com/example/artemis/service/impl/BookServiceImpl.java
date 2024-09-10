@@ -13,6 +13,7 @@ import com.example.artemis.dto.CreateBookRequestDto;
 import com.example.artemis.entity.AuthorEntity;
 import com.example.artemis.entity.BookEntity;
 import com.example.artemis.entity.GenreEntity;
+import com.example.artemis.handler.ResponseHandler;
 import com.example.artemis.repository.AuthorRepository;
 import com.example.artemis.repository.BookRepository;
 import com.example.artemis.repository.GenreRepository;
@@ -30,12 +31,11 @@ public class BookServiceImpl implements BookService {
   @Autowired
   private GenreRepository genreRepository;
 
-
   @Override
-  public ResponseEntity<List<BookEntity>> getAllBooks() {
+  public ResponseEntity<Object> getAllBooks() {
     List<BookEntity> books = bookRepository.findAll();
 
-    return new ResponseEntity<>(books, HttpStatus.OK);
+    return ResponseHandler.generateResponse("success", HttpStatus.OK, books.size(), books);
   }
 
   @Override
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public ResponseEntity <BookEntity> createNewBook(CreateBookRequestDto book) {
+  public ResponseEntity<Object> createNewBook(CreateBookRequestDto book) {
     Optional<AuthorEntity> author = authorRepository.findById(book.getAuthor_id());
     Optional<GenreEntity> genre = genreRepository.findById(book.getGenre_id());
     if (author.isPresent() && genre.isPresent()) {
@@ -58,16 +58,17 @@ public class BookServiceImpl implements BookService {
       saveBook.setPublished_date(book.getPublished_date());
       saveBook.setIsbn(book.getIsbn());
       BookEntity saved = bookRepository.save(saveBook);
-      return new ResponseEntity<>(saved, HttpStatus.OK);
+      // return new ResponseEntity<>(saved, HttpStatus.OK);
+      return ResponseHandler.generateResponse("success creating new", HttpStatus.OK, 1, saved);
     }
 
-    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    return ResponseHandler.generateResponse("failed creating data", HttpStatus.NOT_FOUND, 0, null);
   }
 
   @Override
   public ResponseEntity<List<BookEntity>> searchBooks(String title, String author, String genre) {
     List<BookEntity> searchedBooks = bookRepository.searchBooks(title, author, genre);
-    if(searchedBooks.isEmpty()) {
+    if (searchedBooks.isEmpty()) {
       return new ResponseEntity<>(null, HttpStatus.OK);
     }
     return new ResponseEntity<>(searchedBooks, HttpStatus.OK);
@@ -75,7 +76,7 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public ResponseEntity<String> deleteBook(Long id) {
-    if(bookRepository.findById(id).isPresent()) {
+    if (bookRepository.findById(id).isPresent()) {
       bookRepository.deleteById(id);
       return new ResponseEntity<>("Success Delete", HttpStatus.OK);
     }
@@ -102,5 +103,5 @@ public class BookServiceImpl implements BookService {
 
     return new ResponseEntity<>(bookEntityGet, HttpStatus.OK);
   }
-  
+
 }

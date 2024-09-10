@@ -28,14 +28,13 @@ public class BookController {
   private BookService bookService;
 
   @GetMapping()
-  public ResponseEntity<List<BookEntity>> getAllBooks() {
-      System.out.println("halo saya karta");
+  public ResponseEntity<Object> getAllBooks() {
       
       return bookService.getAllBooks();
   }
 
   @PostMapping()
-  public ResponseEntity<BookEntity> createNewBook(@RequestBody CreateBookRequestDto dto) {
+  public ResponseEntity<Object> createNewBook(@RequestBody CreateBookRequestDto dto) {
       //TODO: process POST request
     
       return bookService.createNewBook(dto);
