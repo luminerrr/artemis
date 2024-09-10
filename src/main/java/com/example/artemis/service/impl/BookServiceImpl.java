@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.artemis.dto.BookDto;
 import com.example.artemis.dto.CreateBookRequestDto;
 import com.example.artemis.entity.AuthorEntity;
 import com.example.artemis.entity.BookEntity;

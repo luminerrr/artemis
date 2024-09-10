@@ -1,7 +1,5 @@
 package com.example.artemis.repository;
 
-import com.example.artemis.entity.AuthorEntity;
-import com.example.artemis.entity.BookEntity;
 import com.example.artemis.entity.GenreEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

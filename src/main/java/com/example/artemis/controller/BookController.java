@@ -35,7 +35,6 @@ public class BookController {
 
   @PostMapping()
   public ResponseEntity<Object> createNewBook(@RequestBody CreateBookRequestDto dto) {
-      //TODO: process POST request
     
       return bookService.createNewBook(dto);
   }

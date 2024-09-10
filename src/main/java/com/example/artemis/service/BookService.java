@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.artemis.dto.CreateBookRequestDto;
 import com.example.artemis.entity.BookEntity;
-import com.example.artemis.handler.ResponseHandler;
 
 public interface BookService {
   ResponseEntity<Object> getAllBooks();
