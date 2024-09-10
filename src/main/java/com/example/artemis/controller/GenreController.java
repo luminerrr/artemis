@@ -54,8 +54,8 @@ public class GenreController {
   
   // PUT /id
   @PutMapping("/{id}")
-  public ResponseEntity<GenreDto> updateGenre(@PathVariable Long id, @RequestBody GenreDto entity) { 
-      return genreService.updateGenre(id, entity);
+  public ResponseEntity<GenreDto> updateGenre(@PathVariable Long id, @RequestBody CreateGenreRequestDto dto) {
+      return genreService.updateGenre(id, dto);
   }
 
   // DELETE /id

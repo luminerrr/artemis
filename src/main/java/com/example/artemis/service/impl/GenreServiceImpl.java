@@ -60,7 +60,7 @@ public class GenreServiceImpl implements GenreService {
   public ResponseEntity<GenreDto> saveGenre(CreateGenreRequestDto genre) {
     if(genre == null) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     GenreEntity entity = new GenreEntity();
-    entity.setName(entity.getName());
+    entity.setName(genre.getName());
     GenreEntity saved = genreRepository.save(entity);
     GenreDto savedDto = genreMapper.toDto(saved);
    
@@ -68,9 +68,9 @@ public class GenreServiceImpl implements GenreService {
   }
 
   @Override
-  public ResponseEntity<GenreDto> updateGenre(Long id, GenreDto genre) {
+  public ResponseEntity<GenreDto> updateGenre(Long id, CreateGenreRequestDto genre) {
     Optional<GenreEntity> genreByIdOpt = genreRepository.findById(id);
-    if (!genreByIdOpt.isPresent()) {
+    if (genreByIdOpt.isEmpty()) {
       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 

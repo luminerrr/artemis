@@ -18,6 +18,6 @@ public interface GenreService {
   ResponseEntity<GenreDto> getGenreById(Long id);
   ResponseEntity<String> deleteGenre(Long id);
   ResponseEntity<GenreDto> saveGenre(CreateGenreRequestDto genre);
-  ResponseEntity<GenreDto> updateGenre(Long id,GenreDto genre);
+  ResponseEntity<GenreDto> updateGenre(Long id, CreateGenreRequestDto genre);
   ResponseEntity<Page<GenreDto>> getGenrePages(Pageable pageable);
 }
