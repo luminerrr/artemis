@@ -62,8 +62,15 @@ public class BookServiceImpl implements BookService {
     }
 
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+  }
 
-
+  @Override
+  public ResponseEntity<List<BookEntity>> searchBooks(String title, String author, String genre) {
+    List<BookEntity> searchedBooks = bookRepository.searchBooks(title, author, genre);
+    if(searchedBooks.isEmpty()) {
+      return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    return new ResponseEntity<>(searchedBooks, HttpStatus.OK);
   }
   
 }
