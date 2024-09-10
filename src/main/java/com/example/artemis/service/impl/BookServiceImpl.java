@@ -39,10 +39,10 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public ResponseEntity<BookEntity> getBookById(Long id) {
-    // TODO: Handle null
-    BookEntity book = bookRepository.findById(id).orElse(null);
+    Optional<BookEntity> book = bookRepository.findById(id);
+    if(!book.isPresent()) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
-    return new ResponseEntity<>(book, HttpStatus.OK);
+    return new ResponseEntity<>(book.get(), HttpStatus.OK);
   }
 
   @Override
