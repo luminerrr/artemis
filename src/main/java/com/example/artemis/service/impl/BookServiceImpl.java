@@ -17,11 +17,24 @@ public class BookServiceImpl implements BookService {
   @Autowired
   private BookRepository bookRepository;
 
-
   @Override
   public ResponseEntity<List<BookEntity>> getAllBooks() {
     List<BookEntity> books = bookRepository.findAll();
 
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
+
+  @Override
+  public ResponseEntity<BookEntity> getBookById(Long id) {
+    // TODO: Handle null
+    BookEntity book = bookRepository.findById(id).orElse(null);
+
+    return new ResponseEntity<>(book, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<BookEntity> createBook(BookEntity book) {
+    
+  }
+  
 }

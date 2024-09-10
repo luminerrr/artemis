@@ -8,5 +8,8 @@ import com.example.artemis.entity.BookEntity;
 
 public interface BookService {
   ResponseEntity <List<BookEntity>> getAllBooks();
-  ResponseEntity <BookEntity> createNewBook();
+  ResponseEntity <BookEntity> getBookById(Long id);
+  ResponseEntity <BookEntity> createNewBook(BookEntity book);
+  ResponseEntity <String> deleteBook(Long id);
+  ResponseEntity <BookEntity> updateBook(Long id, BookEntity book);
 }
