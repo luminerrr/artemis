@@ -5,14 +5,15 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
 
 @Component
 public interface GenreService {
   
-  ResponseEntity <List<GenreEntity>> getAllGenres();
-  ResponseEntity<GenreEntity> getGenreById(Long id);
+  ResponseEntity <List<GenreDto>> getAllGenres();
+  ResponseEntity<GenreDto> getGenreById(Long id);
   ResponseEntity<String> deleteGenre(Long id);
-  ResponseEntity<GenreEntity> saveGenre(GenreEntity genre);
-  ResponseEntity<GenreEntity> updateGenre(Long id,GenreEntity genre);
+  ResponseEntity<GenreDto> saveGenre(GenreDto genre);
+  ResponseEntity<GenreDto> updateGenre(Long id,GenreDto genre);
 }

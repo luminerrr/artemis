@@ -2,6 +2,7 @@ package com.example.artemis.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
 import com.example.artemis.service.GenreService;
 import com.example.artemis.service.impl.GenreServiceImpl;
@@ -31,26 +32,26 @@ public class GenreController {
 
   // GET /
   @GetMapping()
-  public ResponseEntity<List<GenreEntity>> getAllGenres() {
+  public ResponseEntity<List<GenreDto>> getAllGenres() {
     return genreService.getAllGenres();
   }
 
   // GET /id
   @GetMapping("/{id}")
-  public ResponseEntity<GenreEntity> getGenreById(@PathVariable Long id) {
+  public ResponseEntity<GenreDto> getGenreById(@PathVariable Long id) {
       return genreService.getGenreById(id);
   }
   
 
   // POST /
   @PostMapping
-  public ResponseEntity<GenreEntity> createGenre(@RequestBody GenreEntity entity) {
+  public ResponseEntity<GenreDto> createGenre(@RequestBody GenreDto entity) {
       return genreService.saveGenre(entity);
   }
   
   // PUT /id
   @PutMapping("/{id}")
-  public ResponseEntity<GenreEntity> updateGenre(@PathVariable Long id, @RequestBody GenreEntity entity) { 
+  public ResponseEntity<GenreDto> updateGenre(@PathVariable Long id, @RequestBody GenreDto entity) { 
       return genreService.updateGenre(id, entity);
   }
 

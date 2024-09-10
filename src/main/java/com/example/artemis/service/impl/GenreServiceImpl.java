@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.artemis.dto.GenreDto;
 import com.example.artemis.entity.GenreEntity;
+import com.example.artemis.mapper.GenreMapper;
 import com.example.artemis.repository.GenreRepository;
 import com.example.artemis.service.GenreService;
 
@@ -17,15 +19,23 @@ public class GenreServiceImpl implements GenreService {
   @Autowired
   private GenreRepository genreRepository;
 
-  public ResponseEntity<List<GenreEntity>> getAllGenres() {
+  @Autowired
+  private GenreMapper genreMapper;
+
+  public ResponseEntity<List<GenreDto>> getAllGenres() {
+    List<GenreEntity> res = genreRepository.findAll();
+    List<GenreDto> dtoRes = res.stream()
+      .map(genreMapper::toDto)
+      .toList();
     
-    return new ResponseEntity<>(genreRepository.findAll(), HttpStatus.OK);
+    return new ResponseEntity<>(dtoRes, HttpStatus.OK);
   }
 
-  public ResponseEntity<GenreEntity> getGenreById(Long id) {
+  public ResponseEntity<GenreDto> getGenreById(Long id) {
     var result = genreRepository.findById(id);
     if(result.isPresent()) {
-      return new ResponseEntity<>(result.get(), HttpStatus.OK);
+      var genreDto = genreMapper.toDto(result.get());
+      return new ResponseEntity<>(genreDto, HttpStatus.OK);
     } else {
       return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
@@ -40,15 +50,18 @@ public class GenreServiceImpl implements GenreService {
     return new ResponseEntity<>("Failed delete", HttpStatus.NOT_FOUND);
   }
 
-  public ResponseEntity<GenreEntity> saveGenre(GenreEntity genre) {
-    GenreEntity res = genreRepository.save(genre);
+  public ResponseEntity<GenreDto> saveGenre(GenreDto genre) {
+    GenreEntity entity = genreMapper.toEntity(genre);
+    GenreEntity saved = genreRepository.save(entity);
+    GenreDto savedDto = genreMapper.toDto(saved);
+    // GenreRepository genreRes = genreMapper.toEntity(genre);
+    // GenreDto res = genreRepository.save(genre);
 
-    return new ResponseEntity<>(res, HttpStatus.OK);
+    return new ResponseEntity<>(savedDto, HttpStatus.OK);
   }
 
-  public ResponseEntity<GenreEntity> updateGenre(Long id, GenreEntity genre) {
+  public ResponseEntity<GenreDto> updateGenre(Long id, GenreDto genre) {
     Optional<GenreEntity> genreByIdOpt = genreRepository.findById(id);
-
     if (!genreByIdOpt.isPresent()) {
       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
@@ -56,8 +69,9 @@ public class GenreServiceImpl implements GenreService {
     GenreEntity genreByIdEntity = genreByIdOpt.get();
     genreByIdEntity.setName(genre.getName());
     genreRepository.save(genreByIdEntity);
+    GenreDto dtoRes = genreMapper.toDto(genreByIdEntity);
 
-    return new ResponseEntity<>(genreByIdEntity, HttpStatus.OK);
+    return new ResponseEntity<>(dtoRes, HttpStatus.OK);
   }
   
 }
