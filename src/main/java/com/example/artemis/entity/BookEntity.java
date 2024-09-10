@@ -29,7 +29,7 @@ public class BookEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
-    private AuthorEntity employee;
+    private AuthorEntity author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id", referencedColumnName = "id", nullable = false)
