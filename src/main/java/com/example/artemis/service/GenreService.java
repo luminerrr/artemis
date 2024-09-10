@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.artemis.dto.CreateGenreRequestDto;
 import com.example.artemis.dto.GenreDto;
-import com.example.artemis.entity.GenreEntity;
 
 @Component
 public interface GenreService {
